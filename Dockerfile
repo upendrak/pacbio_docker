@@ -1,8 +1,13 @@
 FROM ubuntu:18.04
 MAINTAINER Upendra Devisetty <upendra@cyverse.org>
-LABEL version="5.1.0.26412" description="This Dockerfile is for both isoseq"
+LABEL version="5.1.0.26412" description="This Dockerfile is for both smrt and isoseq"
 
-RUN apt-get update && apt-get install -y wget unzip rsync
+RUN apt-get update && apt-get install -y wget unzip rsync locales
+
+RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+RUN echo "LANG=en_US.UTF-8" > /etc/locale.conf
+RUN locale-gen en_US.UTF-8
 
 RUN wget https://downloads.pacbcloud.com/public/software/installers/smrtlink_5.1.0.26412.zip
 
